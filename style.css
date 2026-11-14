@@ -1,0 +1,390 @@
+/* Палитра — из приложения (app/lib/theme/app_colors.dart): тёмный фон,
+   мятный акцент. Светлая тема — для тех, у кого светлая система. */
+:root {
+	--bg: #0B1622;
+	--card: #152436;
+	--card-2: #1A2C41;
+	--line: #22374E;
+	--text: #FFFFFF;
+	--muted: #8C9BAC;
+	--accent: #34D399;
+	--accent-bright: #86F0C4;
+	--on-accent: #0B1622;
+
+	--ok: #34D399;
+	--warn: #F5B84B;
+	--bad: #F26D6D;
+	--unknown: #6E8095;
+	--ok-bg: rgba(52, 211, 153, .13);
+	--warn-bg: rgba(245, 184, 75, .14);
+	--bad-bg: rgba(242, 109, 109, .15);
+	--unknown-bg: rgba(140, 155, 172, .13);
+
+	color-scheme: dark;
+}
+
+@media (prefers-color-scheme: light) {
+	:root {
+		--bg: #F2F5F8;
+		--card: #FFFFFF;
+		--card-2: #F4F7FA;
+		--line: #DCE4ED;
+		--text: #0B1622;
+		--muted: #5A6A7B;
+		--accent: #0E9F6E;
+		--accent-bright: #34D399;
+		--on-accent: #FFFFFF;
+
+		--ok: #0E9F6E;
+		--warn: #B7791F;
+		--bad: #D64545;
+		--unknown: #8C9BAC;
+		--ok-bg: rgba(14, 159, 110, .10);
+		--warn-bg: rgba(183, 121, 31, .12);
+		--bad-bg: rgba(214, 69, 69, .10);
+		--unknown-bg: rgba(90, 106, 123, .10);
+
+		color-scheme: light;
+	}
+
+	.brand-mark { background: #0B1622; padding: 6px 6px 5px; }
+	.brand-mark img { height: 22px; }
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+	margin: 0;
+	background: var(--bg);
+	color: var(--text);
+	font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	-webkit-font-smoothing: antialiased;
+}
+
+.wrap {
+	width: 100%;
+	max-width: 640px;
+	margin: 0 auto;
+	padding: 0 16px;
+}
+
+h1, h2, p { margin: 0; }
+
+/* --- шапка --- */
+
+.top { padding: 20px 0 8px; }
+
+/* Страница симметрична, как шапка приложения (home_screen.dart, _buildHeader): логотип с
+   названием ровно по центру, переключатель языка прижат вправо и центр не сдвигает. */
+.top-row {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 40px;
+}
+
+.brand {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	color: inherit;
+	text-decoration: none;
+	min-width: 0;
+}
+
+/* Логотип — app/assets/images/logo.png, как в шапке приложения. Он светло-мятный
+   и на белом теряется, поэтому в светлой теме лежит на тёмной плашке, как иконка. */
+.brand-mark {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex: none;
+	border-radius: 9px;
+}
+
+.brand-mark img { display: block; width: auto; height: 27px; }
+
+.brand-name { font-weight: 700; font-size: 21px; letter-spacing: -.01em; }
+.brand-sub { color: var(--muted); font-size: 15px; }
+
+.lang {
+	position: absolute;
+	right: 16px;
+	top: 50%;
+	transform: translateY(-50%);
+	display: inline-flex;
+	padding: 3px;
+	border-radius: 999px;
+	background: var(--card);
+	border: 1px solid var(--line);
+	flex: none;
+}
+
+.lang button {
+	appearance: none;
+	border: 0;
+	background: transparent;
+	color: var(--muted);
+	font: inherit;
+	font-size: 13px;
+	font-weight: 600;
+	padding: 4px 11px;
+	border-radius: 999px;
+	cursor: pointer;
+}
+
+.lang button[aria-pressed="true"] {
+	background: var(--accent);
+	color: var(--on-accent);
+}
+
+.lang button:focus-visible,
+.brand:focus-visible,
+.country > summary:focus-visible {
+	outline: 2px solid var(--accent);
+	outline-offset: 2px;
+}
+
+/* --- сводка --- */
+
+main { padding-top: 12px; padding-bottom: 8px; }
+
+.summary {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	gap: 14px;
+	padding: 26px 20px 22px;
+	border-radius: 18px;
+	background: var(--card);
+	border: 1px solid var(--line);
+	--tone: var(--unknown);
+}
+
+/* Данные свежие: общего вердикта нет (10.11), в шапке только «Обновлено …». */
+.summary[data-state="live"] {
+	padding: 4px 0 0;
+	background: none;
+	border: 0;
+}
+.summary[data-state="live"] .beacon { display: none; }
+.summary[data-state="live"] .updated { margin-top: 0; }
+.summary h1[hidden] { display: none; }
+
+.summary[data-state="stale"],
+.summary[data-state="nodata"] { --tone: var(--warn); }
+
+.beacon {
+	flex: none;
+	width: 14px;
+	height: 14px;
+	margin-top: 6px;
+	border-radius: 50%;
+	background: var(--tone);
+	box-shadow: 0 0 0 6px color-mix(in srgb, var(--tone) 18%, transparent),
+		0 0 18px color-mix(in srgb, var(--tone) 55%, transparent);
+}
+
+.summary[data-state="loading"] .beacon { animation: pulse 1.2s ease-in-out infinite; }
+
+@keyframes pulse { 50% { opacity: .35; } }
+
+@media (prefers-reduced-motion: reduce) {
+	.summary[data-state="loading"] .beacon { animation: none; }
+}
+
+.summary-text { min-width: 0; }
+
+.summary h1 {
+	font-size: 23px;
+	line-height: 1.25;
+	font-weight: 700;
+	letter-spacing: -.01em;
+}
+
+.detail { margin-top: 6px; color: var(--text); opacity: .86; }
+.updated { margin-top: 6px; color: var(--muted); font-size: 14px; }
+
+/* --- объявление --- */
+
+.notice {
+	margin-top: 14px;
+	text-align: center;
+	padding: 16px 20px;
+	border-radius: 18px;
+	background: var(--warn-bg);
+	border: 1px solid color-mix(in srgb, var(--warn) 35%, transparent);
+}
+
+.notice h2 {
+	font-size: 13px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: .06em;
+	color: var(--warn);
+	margin-bottom: 4px;
+}
+
+.notice p { white-space: pre-line; overflow-wrap: anywhere; }
+
+/* --- списки --- */
+
+.block { margin-top: 26px; }
+
+.block h2 {
+	font-size: 13px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: .08em;
+	color: var(--muted);
+	text-align: center;
+	margin: 0 4px 10px;
+}
+
+.list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	border-radius: 18px;
+	background: var(--card);
+	border: 1px solid var(--line);
+	overflow: hidden;
+}
+
+.list > li + li { border-top: 1px solid var(--line); }
+
+.row {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 14px 16px;
+	min-height: 56px;
+}
+
+.row-icon {
+	flex: none;
+	width: 28px;
+	text-align: center;
+	font-size: 20px;
+	line-height: 1;
+}
+
+.row-icon .flag {
+	display: block;
+	width: 24px;
+	height: 18px;
+	margin: 0 auto;
+	border-radius: 3px;
+	/* Белые края (Польша, Финляндия) не сливаются с карточкой в светлой теме. */
+	box-shadow: 0 0 0 1px var(--line);
+}
+
+.row-main { flex: 1; min-width: 0; }
+.row-name { font-weight: 600; overflow-wrap: anywhere; }
+.row-sub { color: var(--muted); font-size: 14px; margin-top: 1px; }
+.row-note { color: var(--warn); font-size: 14px; margin-top: 2px; }
+
+.pill {
+	flex: none;
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 4px 10px;
+	border-radius: 999px;
+	font-size: 13px;
+	font-weight: 600;
+	white-space: nowrap;
+	--tone: var(--unknown);
+	--tone-bg: var(--unknown-bg);
+	color: var(--tone);
+	background: var(--tone-bg);
+}
+
+.pill::before {
+	content: "";
+	width: 7px;
+	height: 7px;
+	border-radius: 50%;
+	background: currentColor;
+}
+
+[data-s="working"] { --tone: var(--ok); --tone-bg: var(--ok-bg); }
+[data-s="partial"] { --tone: var(--warn); --tone-bg: var(--warn-bg); }
+[data-s="down"] { --tone: var(--bad); --tone-bg: var(--bad-bg); }
+
+/* Страна раскрывается в список своих серверов. */
+.country > summary {
+	list-style: none;
+	cursor: pointer;
+	user-select: none;
+	-webkit-tap-highlight-color: transparent;
+}
+
+.country > summary::-webkit-details-marker { display: none; }
+
+.chev {
+	flex: none;
+	width: 16px;
+	height: 16px;
+	color: var(--muted);
+	transition: transform .15s ease;
+}
+
+.country[open] .chev { transform: rotate(90deg); }
+
+.servers {
+	list-style: none;
+	margin: 0;
+	padding: 2px 16px 14px 56px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+.srv {
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+	padding: 5px 11px;
+	border-radius: 10px;
+	background: var(--card-2);
+	border: 1px solid var(--line);
+	font-size: 14px;
+	font-variant-numeric: tabular-nums;
+}
+
+/* Тон приходит из [data-s] выше; свой --tone здесь его бы перебил. */
+.srv::before {
+	content: "";
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: var(--tone, var(--unknown));
+}
+
+/* Данные устарели — показываем последнее известное, но приглушённо. */
+.is-stale .block .list { opacity: .55; }
+
+/* --- подвал --- */
+
+.foot {
+	text-align: center;
+	padding-top: 22px;
+	padding-bottom: 40px;
+	color: var(--muted);
+	font-size: 13px;
+}
+
+.foot p + p { margin-top: 4px; }
+
+@media (max-width: 420px) {
+	.summary { padding: 18px 16px; gap: 14px; }
+	.summary h1 { font-size: 21px; }
+	.row { padding: 12px 14px; gap: 10px; }
+	.servers { padding-left: 14px; }
+	.brand-sub { display: none; }
+}

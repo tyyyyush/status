@@ -1,0 +1,83 @@
+{
+ "schema": 1,
+ "updatedAt": "2026-11-14T17:57:01Z",
+ "staleAfterSec": 1800,
+ "services": [
+  {
+   "id": "app",
+   "status": "working"
+  },
+  {
+   "id": "bot",
+   "status": "working"
+  },
+  {
+   "id": "payment",
+   "status": "working"
+  }
+ ],
+ "countries": [
+  {
+   "code": "FI",
+   "status": "working",
+   "servers": [
+    {
+     "name": "fi-1",
+     "status": "online"
+    },
+    {
+     "name": "fi-2",
+     "status": "online"
+    },
+    {
+     "name": "fi-3",
+     "status": "online"
+    },
+    {
+     "name": "fi-4",
+     "status": "online"
+    }
+   ]
+  },
+  {
+   "code": "NL",
+   "status": "working",
+   "servers": [
+    {
+     "name": "nl-1",
+     "status": "online"
+    }
+   ]
+  },
+  {
+   "code": "NO",
+   "status": "working",
+   "servers": [
+    {
+     "name": "no-1",
+     "status": "online"
+    },
+    {
+     "name": "no-2",
+     "status": "online"
+    }
+   ]
+  },
+  {
+   "code": "PL",
+   "status": "working",
+   "servers": [
+    {
+     "name": "pl-1",
+     "status": "online"
+    },
+    {
+     "name": "pl-2",
+     "status": "online"
+    }
+   ]
+  }
+ ],
+ "other": [],
+ "notice": null
+}
