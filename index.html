@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0B1622">
+<title>FatVPN — статус</title>
+<meta name="description" content="Работают ли сейчас приложение, бот, оплата и серверы FatVPN.">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!--
+  Статус-страница FatVPN (docs/status-page-2026-11-06.md, этап 2).
+  Читает только status.json со своего же адреса — ни шрифтов, ни счётчиков,
+  ни запросов к нашим серверам (принципы 2 и 3). Тест: site/status/tests.
+-->
+<header class="top">
+	<div class="wrap top-row">
+		<a class="brand" href="./">
+			<span class="brand-mark"><img src="logo.png" width="36" height="32" alt=""></span>
+			<span class="brand-name">FatVPN</span>
+			<span class="brand-sub" data-i18n="brandSub">статус</span>
+		</a>
+		<div class="lang" role="group" data-i18n-label="langLabel" aria-label="Язык">
+			<button type="button" data-lang="ru">RU</button>
+			<button type="button" data-lang="en">EN</button>
+		</div>
+	</div>
+</header>
+
+<main class="wrap">
+	<section class="summary" id="summary" data-state="loading" aria-live="polite">
+		<span class="beacon" aria-hidden="true"></span>
+		<div class="summary-text">
+			<h1 id="headline" data-i18n="loading">Загружаем статус…</h1>
+			<p id="detail" class="detail" hidden></p>
+			<p id="updated" class="updated" hidden></p>
+		</div>
+	</section>
+
+	<section class="notice" id="notice" hidden>
+		<h2 data-i18n="noticeTitle">Объявление</h2>
+		<p id="notice-text"></p>
+	</section>
+
+	<section class="block" id="services-block" hidden>
+		<h2 data-i18n="servicesTitle">Сервисы</h2>
+		<ul class="list" id="services"></ul>
+	</section>
+
+	<section class="block" id="servers-block" hidden>
+		<h2 data-i18n="serversTitle">Серверы</h2>
+		<ul class="list" id="servers"></ul>
+	</section>
+</main>
+
+<footer class="wrap foot">
+	<p data-i18n="checkedFrom">Проверяем из Москвы каждые 5 минут, страница обновляется раз в 10 минут. На мобильном интернете может быть иначе.</p>
+	<p data-i18n="autoRefresh">Страница обновляется сама.</p>
+</footer>
+
+<noscript><p class="wrap foot">Для этой страницы нужен JavaScript. / This page needs JavaScript.</p></noscript>
+<script src="status.js"></script>
+</body>
+</html>
