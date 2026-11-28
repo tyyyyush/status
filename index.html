@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0B1622">
+<title>FatVPN — статус</title>
+<meta name="description" content="Работают ли сейчас приложение, бот, оплата и серверы FatVPN.">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!--
+  Статус-страница FatVPN (docs/status-page-2026-11-06.md, этап 2).
+  Читает только status.json со своего же адреса — ни шрифтов, ни счётчиков,
+  ни запросов к нашим серверам (принципы 2 и 3). Единственное чужое — картинки
+  флагов с flagcdn.com; не открылись — свои рисунки. Тест: site/status/tests.
+  Ссылки в подвале (канал, поддержка, бот в Telegram, 28.11) — обычные ссылки:
+  страница по ним ничего не загружает, переходит только человек.
+-->
+<header class="top">
+	<div class="wrap top-row">
+		<a class="brand" href="./">
+			<span class="brand-mark"><img src="logo.png" width="36" height="32" alt=""></span>
+			<span class="brand-name">FatVPN</span>
+			<span class="brand-sub" data-i18n="brandSub">статус</span>
+		</a>
+		<div class="lang" role="group" data-i18n-label="langLabel" aria-label="Язык">
+			<button type="button" data-lang="ru">RU</button>
+			<button type="button" data-lang="en">EN</button>
+		</div>
+	</div>
+</header>
+
+<main class="wrap">
+	<section class="summary" id="summary" data-state="loading" aria-live="polite">
+		<span class="beacon" aria-hidden="true"></span>
+		<div class="summary-text">
+			<h1 id="headline" data-i18n="loading">Загружаем статус…</h1>
+			<p id="detail" class="detail" hidden></p>
+			<p id="updated" class="updated" hidden></p>
+		</div>
+	</section>
+
+	<section class="notice" id="notice" hidden>
+		<h2 data-i18n="noticeTitle">Объявление</h2>
+		<p id="notice-text"></p>
+	</section>
+
+	<section class="block" id="services-block" hidden>
+		<h2 data-i18n="servicesTitle">Сервисы</h2>
+		<ul class="list" id="services"></ul>
+	</section>
+
+	<section class="block" id="servers-block" hidden>
+		<h2 data-i18n="serversTitle">Серверы</h2>
+		<ul class="list" id="servers"></ul>
+	</section>
+</main>
+
+<footer class="wrap foot">
+	<nav class="links" data-i18n-label="linksLabel" aria-label="FatVPN в Telegram">
+		<!-- Иконки нарисованы здесь (рупор, гарнитура, робот), не из чужого набора.
+		     Подпись — в <span>: applyLang меняет textContent и стёр бы иконку. -->
+		<a href="https://t.me/fat_vpn" target="_blank" rel="noopener noreferrer">
+			<svg class="ico" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3l9-5v15l-9-5H4a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1z"/><path d="M7 14.5 8.5 20H11l-1-5"/><path d="M19.5 9.5v5"/></svg>
+			<span data-i18n="linkNews">Новости</span>
+		</a>
+		<a href="https://t.me/fatvpn_support" target="_blank" rel="noopener noreferrer">
+			<svg class="ico" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="13" width="4" height="6" rx="1.5"/><rect x="17" y="13" width="4" height="6" rx="1.5"/><path d="M19 19v.5a2.5 2.5 0 0 1-2.5 2.5H13"/></svg>
+			<span data-i18n="linkSupport">Поддержка</span>
+		</a>
+		<a href="https://t.me/Fat_VPN_bot" target="_blank" rel="noopener noreferrer">
+			<svg class="ico" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 8V5.5"/><circle cx="12" cy="4" r="1.3"/><circle cx="9" cy="13.5" r="1.3" fill="currentColor" stroke="none"/><circle cx="15" cy="13.5" r="1.3" fill="currentColor" stroke="none"/><path d="M9.5 17h5"/></svg>
+			<span data-i18n="linkBot">Бот</span>
+		</a>
+	</nav>
+	<p data-i18n="checkedFrom">Проверяем из Москвы каждые 5 минут, страница обновляется раз в 10 минут. На мобильном интернете может быть иначе.</p>
+	<p data-i18n="autoRefresh">Страница обновляется сама.</p>
+</footer>
+
+<noscript><p class="wrap foot">Для этой страницы нужен JavaScript. / This page needs JavaScript.</p></noscript>
+<script src="status.js"></script>
+</body>
+</html>

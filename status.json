@@ -1,0 +1,131 @@
+{
+ "schema": 1,
+ "updatedAt": "2026-11-28T19:42:01Z",
+ "staleAfterSec": 1800,
+ "services": [
+  {
+   "id": "app",
+   "status": "working"
+  },
+  {
+   "id": "bot",
+   "status": "working"
+  },
+  {
+   "id": "payment",
+   "status": "working"
+  }
+ ],
+ "countries": [
+  {
+   "code": "CA",
+   "status": "working",
+   "servers": [
+    {
+     "name": "ca-1",
+     "status": "online"
+    }
+   ]
+  },
+  {
+   "code": "DE",
+   "status": "working",
+   "servers": [
+    {
+     "name": "de-1",
+     "status": "online"
+    },
+    {
+     "name": "de-2",
+     "status": "online"
+    }
+   ]
+  },
+  {
+   "code": "EE",
+   "status": "down",
+   "servers": [
+    {
+     "name": "ee-1",
+     "status": "offline"
+    }
+   ]
+  },
+  {
+   "code": "FI",
+   "status": "working",
+   "servers": [
+    {
+     "name": "fi-1",
+     "status": "online"
+    }
+   ]
+  },
+  {
+   "code": "NL",
+   "status": "partial",
+   "servers": [
+    {
+     "name": "nl-1",
+     "status": "online"
+    },
+    {
+     "name": "nl-2",
+     "status": "online"
+    },
+    {
+     "name": "nl-3",
+     "status": "online"
+    },
+    {
+     "name": "nl-4",
+     "status": "offline"
+    },
+    {
+     "name": "nl-5",
+     "status": "offline"
+    },
+    {
+     "name": "nl-6",
+     "status": "online"
+    }
+   ]
+  },
+  {
+   "code": "NO",
+   "status": "down",
+   "servers": [
+    {
+     "name": "no-1",
+     "status": "offline"
+    },
+    {
+     "name": "no-2",
+     "status": "offline"
+    }
+   ]
+  },
+  {
+   "code": "PL",
+   "status": "working",
+   "servers": [
+    {
+     "name": "pl-1",
+     "status": "online"
+    }
+   ]
+  },
+  {
+   "code": "TR",
+   "status": "working",
+   "servers": [
+    {
+     "name": "tr-1",
+     "status": "online"
+    }
+   ]
+  }
+ ],
+ "other": [],
+ "notice": null
+}
